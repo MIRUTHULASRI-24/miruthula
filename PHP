@@ -7,3 +7,209 @@ print("Variable CaPiTaL is " . (isset($CaPiTaL) ? $CaPiTaL : "undefined"));
 
 OUTPUT:
 Variable capital is 67Variable CaPiTaL is undefined
+
+2)
+<?php
+echo "    1    2     3\n";
+for ($i = 1; $i <= 3; $i++) {
+    echo "$i  "; // Print row label
+    for ($j = 1; $j <= 3; $j++) { 
+        $result = $i / $j;
+        $formatted = rtrim(rtrim(number_format($result, 2), '0'), '.');
+        printf("%-5s", $formatted);
+    }
+    echo "\n";
+}
+?>
+
+OUTPUT
+   1    2     3
+1  1    0.5  0.33 
+2  2    1    0.67 
+3  3    1.5  1    
+
+4)
+Predict the output of the following snippet:
+$animal = “antelope”; $animal_heads = 1; $animal_legs = 4;
+echo“The $animal has $animal_heads head(s).”;
+echo“The $animal has $animal_legs leg(s).”;
+
+OUTPUT:
+The antelope has 1 head(s).The antelope has 4 leg(s).
+
+5)
+<html>
+<head>
+    <title>Purchase Calculator</title>
+</head>
+<body>
+    <h2>Purchase Cost Calculator</h2>
+
+    <form method="post">
+        <h3>Item 1</h3>
+        Price: <input type="number" name="price1" step="0.01" required>
+        Quantity: <input type="number" name="qty1" required>
+
+        <h3>Item 2</h3>
+        Price: <input type="number" name="price2" step="0.01" required>
+        Quantity: <input type="number" name="qty2" required>
+
+        <h3>Item 3</h3>
+        Price: <input type="number" name="price3" step="0.01" required>
+        Quantity: <input type="number" name="qty3" required>
+
+        <br><br>
+        <input type="submit" value="Calculate">
+    </form>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Get input values
+        $price1 = $_POST['price1'];
+        $qty1 = $_POST['qty1'];
+        $price2 = $_POST['price2'];
+        $qty2 = $_POST['qty2'];
+        $price3 = $_POST['price3'];
+        $qty3 = $_POST['qty3'];
+
+        // Calculate subtotal
+        $subtotal = ($price1 * $qty1) + ($price2 * $qty2) + ($price3 * $qty3);
+
+        // Calculate tax and total
+        $tax = $subtotal * 0.10;
+        $total = $subtotal + $tax;
+
+        // Display results
+        echo "<h3>Results:</h3>";
+        echo "Subtotal: $" . number_format($subtotal, 2) . "<br>";
+        echo "Tax (10%): $" . number_format($tax, 2) . "<br>";
+        echo "Total Cost: $" . number_format($total, 2);
+    }
+    ?>
+</body>
+</html>
+
+OUTPUT:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Purchase Calculator</title>
+</head>
+<body>
+    <h2>Purchase Cost Calculator</h2>
+
+    <form method="post">
+        <h3>Item 1</h3>
+        Price: <input type="number" name="price1" step="0.01" required>
+        Quantity: <input type="number" name="qty1" required>
+
+        <h3>Item 2</h3>
+        Price: <input type="number" name="price2" step="0.01" required>
+        Quantity: <input type="number" name="qty2" required>
+
+        <h3>Item 3</h3>
+        Price: <input type="number" name="price3" step="0.01" required>
+        Quantity: <input type="number" name="qty3" required>
+
+        <br><br>
+        <input type="submit" value="Calculate">
+    </form>
+
+    
+Warning: Undefined array key "REQUEST_METHOD" in /tmp/fpLxkSTmYu/main.php on line 27
+</body>
+</html>
+
+6)
+<?php
+session_start();
+
+// Check if form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $_SESSION['username'] = $_POST['username'];
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+// If session is set, show welcome message
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Example</title>
+</head>
+<body>
+
+<?php if ($username): ?>
+    <p>Welcome, <?php echo htmlspecialchars($username); ?>!</p>
+    <p><a href="?logout=true">Logout</a></p>
+<?php else: ?>
+    <form method="post">
+        <label>Enter your name:</label>
+        <input type="text" name="username" required>
+        <button type="submit">Submit</button>
+    </form>
+<?php endif; ?>
+
+<?php
+// Handle logout
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+?>
+
+</body>
+</html>
+
+OUTPUT:
+Warning: Undefined array key "REQUEST_METHOD" in /tmp/EQu466wsHx/main.php on line 5
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Example</title>
+</head>
+<body>
+
+    <form method="post">
+        <label>Enter your name:</label>
+        <input type="text" name="username" required>
+        <button type="submit">Submit</button>
+    </form>
+
+
+</body>
+</html>
+
+8)
+<?php
+function deal($costA, $sizeA, $costB, $sizeB) {
+    $costPerUnitA = $costA / $sizeA;
+    $costPerUnitB = $costB / $sizeB;
+
+    echo "Cost per unit for Drink A: " . number_format($costPerUnitA, 2) . " Rs/ml<br>";
+    echo "Cost per unit for Drink B: " . number_format($costPerUnitB, 2) . " Rs/ml<br>";
+
+    if ($costPerUnitA < $costPerUnitB) {
+        echo "Drink A is the better deal.";
+    } elseif ($costPerUnitB < $costPerUnitA) {
+        echo "Drink B is the better deal.";
+    } else {
+        echo "Both drinks offer the same value.";
+    }
+}
+
+$costA = 25; $sizeA = 11;
+$costB = 23; $sizeB = 9;
+
+deal($costA, $sizeA, $costB, $sizeB);
+?>
+
+OUTPUT:
+Cost per unit for Drink A: 2.27 Rs/ml<br>Cost per unit for Drink B: 2.56 Rs/ml<br>Drink A is the better deal.
+
+      
