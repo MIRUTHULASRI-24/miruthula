@@ -212,4 +212,404 @@ deal($costA, $sizeA, $costB, $sizeB);
 OUTPUT:
 Cost per unit for Drink A: 2.27 Rs/ml<br>Cost per unit for Drink B: 2.56 Rs/ml<br>Drink A is the better deal.
 
-      
+7)
+<?php
+$name = '';
+$error = '';
+$greeting = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = trim($_POST["name"]);
+
+    if (empty($name)) {
+        $error = "Error: Name field cannot be empty.";
+    } else {
+        $greeting = "Hello, Welcome to Everyone!<br>Have a nice day!!";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Greeting Form</title>
+</head>
+<body>
+
+<form method="post">
+    <label for="name">Enter your name:</label>
+    <input type="text" name="name" id="name">
+    <button type="submit">Submit</button>
+</form>
+
+<?php if ($error): ?>
+    <p style="color: red;"><?php echo $error; ?></p>
+<?php elseif ($greeting): ?>
+    <p><?php echo $greeting; ?></p>
+<?php endif; ?>
+
+</body>
+</html>
+
+OUTPUT:
+Have a nice day!!"; } } ?>
+Enter your name: 
+MIRUTHULASRI
+ Submit
+
+9)
+$this = “this”; 
+$that = “that”; 
+$the_other = 2.2000000000;
+
+print(“$this,$not_set,$that+$the_other”)
+
+OUTPUT:
+$this = "this"; 
+$that = “that”; 
+$the_other = 2.2000000000;
+
+print(“$this,$not_set,$that+$the_other”)
+
+=== Code Execution Successful ===
+
+10)
+<?php
+$num_students = (int)readline("Enter the number of students: ");
+
+for ($i = 1; $i <= $num_students; $i++) {
+    $marks = (float)readline("Enter marks for student $i: ");
+
+    if ($marks >= 90) {
+        $grade = 'A';
+    } elseif ($marks >= 80) {
+        $grade = 'B';
+    } elseif ($marks >= 70) {
+        $grade = 'C';
+    } elseif ($marks >= 60) {
+        $grade = 'D';
+    } else {
+        $grade = 'F';
+    }
+
+    echo "Student $i Grade: $grade\n";
+}
+?>
+OUTPUT:
+Enter the number of students: 80
+Enter marks for student 1: 99
+Student 1 Grade: A
+Enter marks for student 2: 90
+Student 2 Grade: A
+Enter marks for student 3: 
+
+11)
+<?php
+$day_number = (int)readline("Enter a number (1 to 7) to get the day of the week: ");
+
+switch ($day_number) {
+    case 1:
+        echo "Sunday\n";
+        break;
+    case 2:
+        echo "Monday\n";
+        break;
+    case 3:
+        echo "Tuesday\n";
+        break;
+    case 4:
+        echo "Wednesday\n";
+        break;
+    case 5:
+        echo "Thursday\n";
+        break;
+    case 6:
+        echo "Friday\n";
+        break;
+    case 7:
+        echo "Saturday\n";
+        break;
+    default:
+        echo "Invalid input! Please enter a number between 1 and 7.\n";
+}
+?>
+OUTPUT:
+Enter a number (1 to 7) to get the day of the week: 4
+Wednesday
+
+12)
+<?php
+$marks = (float)readline("Enter the student's marks (%): ");
+
+if ($marks >= 75) {
+    echo "Grade: First Class\n";
+} elseif ($marks >= 60 && $marks <= 74) {
+    echo "Grade: Second Class\n";
+} elseif ($marks >= 40 && $marks <= 59) {
+    echo "Grade: Third Class\n";
+} else {
+    echo "Grade: Fail\n";
+}
+?>
+OUTPUT:
+Enter the student's marks (%): 90
+Grade: First Class
+
+13)
+$sub = substr(12345, 2, 2);
+echo “sub is $sub”;
+OUTPUT:
+sub is 34
+
+15)
+<?php
+$number = (int)readline("Enter a number: ");
+$sum = 0;
+$temp = $number;
+
+while ($temp > 0) {
+    $digit = $temp % 10;
+    $sum += $digit;
+    $temp = (int)($temp / 10);
+}
+
+echo "Sum of the digits of $number is: $sum\n";
+?>
+
+OUTPUT:
+Enter a number: 24
+Sum of the digits of 24 is: 6
+
+17)
+<?php
+$balance = 1000;
+
+while (true) {
+    echo "\n1. Check Balance\n2. Deposit\n3. Withdraw\n4. Exit\nChoose: ";
+    $choice = (int)readline();
+
+    switch ($choice) {
+        case 1:
+            echo "Balance: ₹$balance\n";
+            break;
+        case 2:
+            $deposit = (float)readline("Enter deposit amount: ");
+            if ($deposit > 0) {
+                $balance += $deposit;
+                echo "Deposited. New Balance: ₹$balance\n";
+            } else {
+                echo "Invalid amount!\n";
+            }
+            break;
+        case 3:
+            $withdraw = (float)readline("Enter withdraw amount: ");
+            if ($withdraw > 0 && $withdraw <= $balance) {
+                $balance -= $withdraw;
+                echo "Withdrawn. New Balance: ₹$balance\n";
+            } else {
+                echo "Invalid or insufficient balance!\n";
+            }
+            break;
+        case 4:
+            echo "Thank you!\n";
+            exit;
+        default:
+            echo "Invalid option.\n";
+    }
+}
+?>
+OUTPUT:
+1. Check Balance
+2. Deposit
+3. Withdraw
+4. Exit
+Choose: 3
+Enter withdraw amount: 5000
+Invalid or insufficient balance!
+
+1. Check Balance
+2. Deposit
+3. Withdraw
+4. Exit
+Choose: 
+
+18)
+<?php
+$name = "Miruthulasri";
+
+if (isset($name)) {
+    echo "Variable is set.";
+} else {
+    echo "Variable is not set.";
+}
+?>
+OUTPUT:
+Variable is set.
+
+19)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Highest and Lowest Finder</title>
+</head>
+<body>
+
+<?php
+function findHighLow($arr) {
+    $max = max($arr);
+    $min = min($arr);
+    return ["highest" => $max, "lowest" => $min];
+}
+
+$numbers = [12, 45, 3, 78, 23, 9];
+
+$result = findHighLow($numbers);
+
+echo "<h3>Array: " . implode(", ", $numbers) . "</h3>";
+echo "<p>Highest Value: " . $result['highest'] . "</p>";
+echo "<p>Lowest Value: " . $result['lowest'] . "</p>";
+?>
+
+</body>
+</html>
+
+OUTPUT:
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Highest and Lowest Finder</title>
+</head>
+<body>
+
+<h3>Array: 12, 45, 3, 78, 23, 9</h3><p>Highest Value: 78</p><p>Lowest Value: 3</p>
+</body>
+</html>
+
+21)
+<?php
+function isLeapYear($year) {
+    return ($year % 4 == 0 && $year % 100 != 0) || ($year % 400 == 0);
+}
+
+$year = 2024;
+echo isLeapYear($year) ? "$year is a leap year." : "$year is not a leap year.";
+?>
+OUTPUT:
+2024 is a leap year.
+
+22)
+<?php
+$text = "PHP is great. PHP is powerful.";
+$word = "PHP";
+echo substr_count($text, $word);
+?>
+OUTPUT:
+2
+
+24)
+<?php
+$str = "  Hello World from PHP!  ";
+
+echo trim($str) . "\n";
+echo strlen($str) . "\n";
+echo str_word_count($str) . "\n";
+echo strrev($str) . "\n";
+echo strtoupper($str) . "\n";
+echo strtolower($str) . "\n";
+echo str_replace("PHP", "Code", $str) . "\n";
+echo substr($str, 6, 5) . "\n";
+echo strpos($str, "World") . "\n";
+?>
+OUTPUT:
+Hello World from PHP!
+25
+4
+  !PHP morf dlroW olleH  
+  HELLO WORLD FROM PHP!  
+  hello world from php!  
+  Hello World from Code!  
+o Wor
+8
+
+25)
+<?php
+$text = "The Thing will come to you soon";
+$result = preg_replace('/\bthe\b/i', 'best', $text, 1);
+echo $result;
+?>
+OUTPUT:
+best Thing will come to you soon
+
+27)
+<?php
+$a = 10;
+$b = 3;
+
+echo "Addition: " . ($a + $b) . "\n";         // 13
+echo "Subtraction: " . ($a - $b) . "\n";      // 7
+echo "Multiplication: " . ($a * $b) . "\n";   // 30
+echo "Division: " . ($a / $b) . "\n";         // 3.333...
+echo "Modulus: " . ($a % $b) . "\n";          // 1
+echo "Exponent: " . ($a ** $b) . "\n";        // 1000
+?>
+OUTPUT:
+Addition: 13
+Subtraction: 7
+Multiplication: 30
+Division: 3.3333333333333
+Modulus: 1
+Exponent: 1000
+
+28)
+<?php
+$a = 10;
+$b = "10";
+$c = 20;
+
+var_dump($a == $b);   // true (value equal)
+var_dump($a === $b);  // false (value same, type different)
+var_dump($a == $c);   // false
+var_dump($a === $c);  // false
+?>
+
+OUTPUT:
+bool(true)
+bool(false)
+bool(false)
+bool(false)
+
+29)
+<?php
+echo "Random number (1-100): " . rand(1, 100) . "\n";
+echo "Absolute of -15: " . abs(-15) . "\n";
+echo "String Replace: " . str_replace("world", "PHP", "Hello world") . "\n";
+echo "Value of Pi: " . pi() . "\n";
+echo "Ceil of 4.3: " . ceil(4.3) . "\n";
+?>
+OUTPUT:
+Random number (1-100): 96
+Absolute of -15: 15
+String Replace: Hello PHP
+Value of Pi: 3.1415926535898
+Ceil of 4.3: 5
+
+30)
+<?php
+function generatePassword($length = 10) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+=-';
+    $password = '';
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $chars[rand(0, strlen($chars) - 1)];
+    }
+    return $password;
+}
+
+echo "Generated Password: " . generatePassword(12);
+?>
+OUTPUT:
+Generated Password: YM5bu1i9fRHb
+
+
+
+
+
