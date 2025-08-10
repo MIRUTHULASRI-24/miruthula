@@ -38,87 +38,22 @@ OUTPUT:
 The antelope has 1 head(s).The antelope has 4 leg(s).
 
 5)
-<html>
-<head>
-    <title>Purchase Calculator</title>
-</head>
-<body>
-    <h2>Purchase Cost Calculator</h2>
+?php
+$item1_price = 100; $item1_qty = 2;
+$item2_price = 50; $item2_qty = 3;
+$item3_price = 30; $item3_qty = 1;
 
-    <form method="post">
-        <h3>Item 1</h3>
-        Price: <input type="number" name="price1" step="0.01" required>
-        Quantity: <input type="number" name="qty1" required>
+$subtotal = ($item1_price * $item1_qty) + ($item2_price * $item2_qty) + ($item3_price * $item3_qty);
+$tax = $subtotal * 0.10;
+$total = $subtotal + $tax;
 
-        <h3>Item 2</h3>
-        Price: <input type="number" name="price2" step="0.01" required>
-        Quantity: <input type="number" name="qty2" required>
-
-        <h3>Item 3</h3>
-        Price: <input type="number" name="price3" step="0.01" required>
-        Quantity: <input type="number" name="qty3" required>
-
-        <br><br>
-        <input type="submit" value="Calculate">
-    </form>
-
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Get input values
-        $price1 = $_POST['price1'];
-        $qty1 = $_POST['qty1'];
-        $price2 = $_POST['price2'];
-        $qty2 = $_POST['qty2'];
-        $price3 = $_POST['price3'];
-        $qty3 = $_POST['qty3'];
-
-       
-        $subtotal = ($price1 * $qty1) + ($price2 * $qty2) + ($price3 * $qty3);
-
-        $tax = $subtotal * 0.10;
-        $total = $subtotal + $tax;
-
-        echo "<h3>Results:</h3>";
-        echo "Subtotal: $" . number_format($subtotal, 2) . "<br>";
-        echo "Tax (10%): $" . number_format($tax, 2) . "<br>";
-        echo "Total Cost: $" . number_format($total, 2);
-    }
-    ?>
-</body>
-</html>
-
+echo "Subtotal: Rs. $subtotal<br>";
+echo "Tax (10%): Rs. $tax<br>";
+echo "Total Cost: Rs. $total<br>";
+?>
 OUTPUT:
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Purchase Calculator</title>
-</head>
-<body>
-    <h2>Purchase Cost Calculator</h2>
+Subtotal: Rs. 380<br>Tax (10%): Rs. 38<br>Total Cost: Rs. 418<br>
 
-    <form method="post">
-        <h3>Item 1</h3>
-        Price: <input type="number" name="price1" step="0.01" required>
-        Quantity: <input type="number" name="qty1" required>
-
-        <h3>Item 2</h3>
-        Price: <input type="number" name="price2" step="0.01" required>
-        Quantity: <input type="number" name="qty2" required>
-
-        <h3>Item 3</h3>
-        Price: <input type="number" name="price3" step="0.01" required>
-        Quantity: <input type="number" name="qty3" required>
-
-        <br><br>
-        <input type="submit" value="Calculate">
-    </form>
-
-    
-Warning: Undefined array key "REQUEST_METHOD" in /tmp/fpLxkSTmYu/main.php on line 27
-</body>
-</html>
-
-6)
 6)
 <form method="get" action="nextpage.php">
   Name: <input type="text" name="username">
@@ -191,7 +126,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php elseif ($greeting): ?>
     <p><?php echo $greeting; ?></p>
 <?php endif; ?>
-
 </body>
 </html>
 
@@ -205,14 +139,12 @@ MIRUTHULASRI
 $this = “this”; 
 $that = “that”; 
 $the_other = 2.2000000000;
-
 print(“$this,$not_set,$that+$the_other”)
 
 OUTPUT:
 $this = "this"; 
 $that = “that”; 
 $the_other = 2.2000000000;
-
 print(“$this,$not_set,$that+$the_other”)
 
 === Code Execution Successful ===
@@ -220,10 +152,8 @@ print(“$this,$not_set,$that+$the_other”)
 10)
 <?php
 $num_students = (int)readline("Enter the number of students: ");
-
 for ($i = 1; $i <= $num_students; $i++) {
     $marks = (float)readline("Enter marks for student $i: ");
-
     if ($marks >= 90) {
         $grade = 'A';
     } elseif ($marks >= 80) {
@@ -235,7 +165,6 @@ for ($i = 1; $i <= $num_students; $i++) {
     } else {
         $grade = 'F';
     }
-
     echo "Student $i Grade: $grade\n";
 }
 ?>
@@ -250,7 +179,6 @@ Enter marks for student 3:
 11)
 <?php
 $day_number = (int)readline("Enter a number (1 to 7) to get the day of the week: ");
-
 switch ($day_number) {
     case 1:
         echo "Sunday\n";
@@ -284,7 +212,6 @@ Wednesday
 12)
 <?php
 $marks = (float)readline("Enter the student's marks (%): ");
-
 if ($marks >= 75) {
     echo "Grade: First Class\n";
 } elseif ($marks >= 60 && $marks <= 74) {
@@ -310,13 +237,11 @@ sub is 34
 $number = (int)readline("Enter a number: ");
 $sum = 0;
 $temp = $number;
-
 while ($temp > 0) {
     $digit = $temp % 10;
     $sum += $digit;
     $temp = (int)($temp / 10);
 }
-
 echo "Sum of the digits of $number is: $sum\n";
 ?>
 
@@ -380,7 +305,6 @@ Choose:
 18)
 <?php
 $name = "Miruthulasri";
-
 if (isset($name)) {
     echo "Variable is set.";
 } else {
@@ -404,11 +328,8 @@ function findHighLow($arr) {
     $min = min($arr);
     return ["highest" => $max, "lowest" => $min];
 }
-
 $numbers = [12, 45, 3, 78, 23, 9];
-
 $result = findHighLow($numbers);
-
 echo "<h3>Array: " . implode(", ", $numbers) . "</h3>";
 echo "<p>Highest Value: " . $result['highest'] . "</p>";
 echo "<p>Lowest Value: " . $result['lowest'] . "</p>";
@@ -434,7 +355,6 @@ OUTPUT:
 function isLeapYear($year) {
     return ($year % 4 == 0 && $year % 100 != 0) || ($year % 400 == 0);
 }
-
 $year = 2024;
 echo isLeapYear($year) ? "$year is a leap year." : "$year is not a leap year.";
 ?>
@@ -489,12 +409,12 @@ best Thing will come to you soon
 $a = 10;
 $b = 3;
 
-echo "Addition: " . ($a + $b) . "\n";         // 13
-echo "Subtraction: " . ($a - $b) . "\n";      // 7
-echo "Multiplication: " . ($a * $b) . "\n";   // 30
-echo "Division: " . ($a / $b) . "\n";         // 3.333...
-echo "Modulus: " . ($a % $b) . "\n";          // 1
-echo "Exponent: " . ($a ** $b) . "\n";        // 1000
+echo "Addition: " . ($a + $b) . "\n";        
+echo "Subtraction: " . ($a - $b) . "\n";    
+echo "Multiplication: " . ($a * $b) . "\n";   
+echo "Division: " . ($a / $b) . "\n";         
+echo "Modulus: " . ($a % $b) . "\n";       
+echo "Exponent: " . ($a ** $b) . "\n";       
 ?>
 OUTPUT:
 Addition: 13
@@ -510,10 +430,10 @@ $a = 10;
 $b = "10";
 $c = 20;
 
-var_dump($a == $b);   // true (value equal)
-var_dump($a === $b);  // false (value same, type different)
-var_dump($a == $c);   // false
-var_dump($a === $c);  // false
+var_dump($a == $b);   
+var_dump($a === $b);  
+var_dump($a == $c);  
+var_dump($a === $c);  
 ?>
 
 OUTPUT:
