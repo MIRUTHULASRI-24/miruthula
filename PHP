@@ -119,66 +119,16 @@ Warning: Undefined array key "REQUEST_METHOD" in /tmp/fpLxkSTmYu/main.php on lin
 </html>
 
 6)
-<?php
-session_start();
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $_SESSION['username'] = $_POST['username'];
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Session Example</title>
-</head>
-<body>
-
-<?php if ($username): ?>
-    <p>Welcome, <?php echo htmlspecialchars($username); ?>!</p>
-    <p><a href="?logout=true">Logout</a></p>
-<?php else: ?>
-    <form method="post">
-        <label>Enter your name:</label>
-        <input type="text" name="username" required>
-        <button type="submit">Submit</button>
-    </form>
-<?php endif; ?>
-
-<?php
-if (isset($_GET['logout'])) {
-    session_destroy();
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
-?>
-
-</body>
-</html>
-
+6)
+<form method="get" action="nextpage.php">
+  Name: <input type="text" name="username">
+  <input type="submit">
+</form>
 OUTPUT:
-Warning: Undefined array key "REQUEST_METHOD" in /tmp/EQu466wsHx/main.php on line 5
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Session Example</title>
-</head>
-<body>
-
-    <form method="post">
-        <label>Enter your name:</label>
-        <input type="text" name="username" required>
-        <button type="submit">Submit</button>
-    </form>
-
-
-</body>
-</html>
-
+<form method="get" action="nextpage.php">
+  Name: <input type="text" name="username">
+  <input type="submit">
+</form>
 8)
 <?php
 function deal($costA, $sizeA, $costB, $sizeB) {
