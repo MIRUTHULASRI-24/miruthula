@@ -72,14 +72,12 @@ The antelope has 1 head(s).The antelope has 4 leg(s).
         $price3 = $_POST['price3'];
         $qty3 = $_POST['qty3'];
 
-        // Calculate subtotal
+       
         $subtotal = ($price1 * $qty1) + ($price2 * $qty2) + ($price3 * $qty3);
 
-        // Calculate tax and total
         $tax = $subtotal * 0.10;
         $total = $subtotal + $tax;
 
-        // Display results
         echo "<h3>Results:</h3>";
         echo "Subtotal: $" . number_format($subtotal, 2) . "<br>";
         echo "Tax (10%): $" . number_format($tax, 2) . "<br>";
@@ -124,14 +122,11 @@ Warning: Undefined array key "REQUEST_METHOD" in /tmp/fpLxkSTmYu/main.php on lin
 <?php
 session_start();
 
-// Check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['username'] = $_POST['username'];
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
 }
-
-// If session is set, show welcome message
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 ?>
 
@@ -154,7 +149,6 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
 <?php endif; ?>
 
 <?php
-// Handle logout
 if (isset($_GET['logout'])) {
     session_destroy();
     header("Location: " . $_SERVER['PHP_SELF']);
