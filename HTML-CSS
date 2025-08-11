@@ -1,122 +1,62 @@
 14)
-<?php
-$name = $email = $message = '';
-$submitted = false;
+<?php if ($_SERVER["REQUEST_METHOD"]=="POST" && 
+($n=trim($_POST["name"])) && filter_var($_POST["email"], 
+FILTER_VALIDATE_EMAIL) && ($m=trim($_POST["message"]))) : ?>
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Simple validation (optional: you can add more)
-    $name = htmlspecialchars(trim($_POST["name"]));
-    $email = htmlspecialchars(trim($_POST["email"]));
-    $message = htmlspecialchars(trim($_POST["message"]));
+<h3> Thank you , <?=htmlspecialchars($n) ?> ! </h3>
+<p> your message has been received . We will contact you 
+at : <strong><?=htmlspecialchars($e) ?></strong></p>
 
-    if (!empty($name) && !empty($email) && !empty($message)) {
-        $submitted = true;
-    }
-}
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Contact Form</title>
-</head>
-<body>
-
-<?php if ($submitted): ?>
-    <h3>Thank you, <?php echo $name; ?>!</h3>
-    <p>Your message has been received.</p>
-    <p>We will contact you at: <strong><?php echo $email; ?></strong></p>
 <?php else: ?>
-    <h2>Contact Us</h2>
-    <form method="post">
-        <label for="name">Name:</label><br>
-        <input type="text" name="name" id="name" required><br><br>
-
-        <label for="email">Email:</label><br>
-        <input type="email" name="email" id="email" required><br><br>
-
-        <label for="message">Message:</label><br>
-        <textarea name="message" id="message" rows="5" required></textarea><br><br>
-
-        <button type="submit">Send</button>
-    </form>
+<form method = 'post'>
+<input name = "name" placeholder = "Name" required ><br>
+<input type = "email" name = "email" placeholder = "Email" 
+required ><br>
+<textarea name = "message" placeholder = "message" ></textarea><br>
+<button> Add </button>
+</form>
 <?php endif; ?>
 
-</body>
-</html>
 OUTPUT:
-Thank you, !
-Your message has been received.
+Thank you , !
+your message has been received . We will contact you at :
 
-We will contact you at:
+Name
 
-Contact Us
-Name:
-MIRUTHULASRI
+Email
 
+message
 
-Email:
-23bcs061@psgrkcw.ac.in
-
-
-Message:
-Hii!
-How are you?
-
-
-Send
+Add
 
 16)
 <?php
-$result = "";
-
-// Define the function
-function addNumbers($num1, $num2) {
-    return $num1 + $num2;
+function addNumbers($a, $b) {
+    return $a + $b;
 }
-
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $number1 = isset($_POST['num1']) ? (float)$_POST['num1'] : 0;
-    $number2 = isset($_POST['num2']) ? (float)$_POST['num2'] : 0;
-
-    $result = "The sum is: " . addNumbers($number1, $number2);
-}
+$res = ($_SERVER["REQUEST_METHOD"] == "POST") ? 
+    "The sum is: " . addNumbers($_POST['num1'], $_POST['num2']) : "";
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-    <title>Sum of Two Numbers</title>
-</head>
 <body>
 
-<h2>Add Two Numbers</h2>
 <form method="post">
-    <label>Number 1:</label>
-    <input type="number" name="num1" step="any" required><br><br>
-
-    <label>Number 2:</label>
-    <input type="number" name="num2" step="any" required><br><br>
-
-    <button type="submit">Add</button>
+    <input type="number" name="num1" step="any" placeholder="Number 1" required>
+    <input type="number" name="num2" step="any" placeholder="Number 2" required>
+    <button>Add</button>
 </form>
 
-<?php if ($result): ?>
-    <h3><?php echo $result; ?></h3>
-<?php endif; ?>
+<?php 
+if ($res) echo "<h3>$res</h3>"; 
+?>
 
 </body>
 </html>
-
 OUTPUT:
-Add Two Numbers
 Number 1: 24
-
-
 Number 2: 2
-
-
 Add
 
 20)
