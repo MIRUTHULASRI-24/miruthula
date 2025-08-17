@@ -767,6 +767,86 @@ if (preg_match($pattern, $password)) {
 OUTPUT:
 Valid password.
 
+44)
+<?php
+// Songs and Playlists
+$songs = [
+    ['id' => 1, 'title' => 'Imagine', 'artist' => 'John Lennon'],
+    ['id' => 2, 'title' => 'Hey Jude', 'artist' => 'The Beatles']
+];
+$playlists = [];
+
+// Create Playlist
+function createPlaylist(&$playlists, $name) {
+    $playlists[] = ['id' => time(), 'name' => $name, 'songs' => []];
+}
+
+// Add Song
+function addSong(&$playlists, $pid, $sid) {
+    foreach ($playlists as &$p) if ($p['id'] === $pid && !in_array($sid, $p['songs'])) $p['songs'][] = $sid;
+}
+
+// Remove Song
+function removeSong(&$playlists, $pid, $sid) {
+    foreach ($playlists as &$p) if ($p['id'] === $pid)
+        $p['songs'] = array_filter($p['songs'], fn($id) => $id !== $sid);
+}
+
+// View Playlist
+function viewPlaylist($playlists, $songs, $pid) {
+    foreach ($playlists as $p) if ($p['id'] === $pid) {
+        return array_map(fn($id) => array_values(array_filter($songs, fn($s) => $s['id'] === $id))[0], $p['songs']);
+    }
+    return [];
+}
+
+// Swap Songs
+function swapSongs(&$playlists, $pid, $i, $j) {
+    foreach ($playlists as &$p)
+        if ($p['id'] === $pid) [$p['songs'][$i], $p['songs'][$j]] = [$p['songs'][$j], $p['songs'][$i]];
+}
+
+// Delete Playlist
+function deletePlaylist(&$playlists, $pid) {
+    foreach ($playlists as $i => $p) if ($p['id'] === $pid) unset($playlists[$i]);
+}
+
+// Search Songs
+function searchSongs($songs, $key) {
+    return array_filter($songs, fn($s) =>
+        stripos($s['title'], $key) !== false || stripos($s['artist'], $key) !== false);
+}
+?>
+
+45)
+<?php
+function arrayDiffRecursive($a1, $a2) {
+    $diff = [];
+    foreach ($a1 as $k => $v) {
+        if (!isset($a2[$k])) $diff[$k] = $v;
+        elseif (is_array($v)) {
+            $d = arrayDiffRecursive($v, $a2[$k]);
+            if ($d) $diff[$k] = $d;
+        } elseif ($v !== $a2[$k]) $diff[$k] = $v;
+    }
+    return $diff;
+}
+
+$a1 = ['name' => 'John', 'info' => ['age' => 30, 'city' => 'NY']];
+$a2 = ['name' => 'John', 'info' => ['age' => 25, 'city' => 'NY']];
+
+print_r(arrayDiffRecursive($a1, $a2));
+?>
+OUTPUT:
+Array
+(
+    [info] => Array
+        (
+            [age] => 30
+        )
+
+)
+
 46)
 <?php
 $array = ['apple', 'banana', 'cherry'];
@@ -803,6 +883,45 @@ Array
     [3] => 4
     [4] => 5
 )
+
+48)
+1. Serial Number in a Loop (Array Records)
+<?php
+$names = ['Alice', 'Bob', 'Charlie'];
+
+$record_no = 1;
+foreach ($names as $name) {
+    echo "Record #$record_no: $name<br>";
+    $record_no++;
+}
+?>
+
+
+Output:
+
+Record #1: Alice
+Record #2: Bob
+Record #3: Charlie
+
+2. Record Number with Pagination Calculation
+<?php
+$page = 3;      // current page
+$limit = 5;     // records per page
+$start = ($page - 1) * $limit + 1;
+
+for ($i = 0; $i < $limit; $i++) {
+    echo "Record #" . ($start + $i) . "<br>";
+}
+?>
+
+
+Output:
+
+Record #11
+Record #12
+Record #13
+Record #14
+Record #15
 
 49)
 <?php
@@ -988,6 +1107,41 @@ echo $reversed;
 OUTPUT:
 olleH
 
+56)
+list of PHP array sorting functions:
+
+sort() — sort values ascending, keys reset
+rsort() — sort values descending, keys reset
+asort() — sort values ascending, keep keys
+arsort() — sort values descending, keep keys
+ksort() — sort by keys ascending
+krsort() — sort by keys descending
+usort() — custom sort values with callback
+uksort() — custom sort keys with callback
+uasort() — custom sort values with callback, keep keys
+57)
+What is a Regular Expression?
+A pattern used to match character combinations in strings.
+
+Pattern	    Meaning	                        Example
+.	     Any character	                a.b matches acb
+\d	     Digit (0-9)	                \d+ matches 123
+\w	     Word character	                \w+ matches hello
+^	     Start of string	            ^Hi matches Hi there
+$	     End of string	                end$ matches the end
+*	     0 or more repeats	            a* matches ``, a, aaa
++	     1 or more repeats	            a+ matches a, aa
+
+<?php
+if (preg_match("/Hello\d+/", "Hello123")) {
+    echo "Match!";
+} else {
+    echo "No match";
+}
+?>
+OUTPUT:
+Match!
+
 58)
 <?php
 $text = "Email me at alice@example.com or bob123@test.com.";
@@ -1045,6 +1199,35 @@ if (searchValue($assocArray, "Alice")) {
 
 OUTPUT:
 Value found!
+61)
+steps to delete an element from a PHP array:
+
+Find the element’s key/index you want to delete.
+
+Use unset() to remove the element by key.
+
+(Optional) Use array_values() if you want to reindex numeric keys.
+
+Example:
+<?php
+$arr = ['a', 'b', 'c', 'd'];
+
+// Step 1 & 2: Remove element at index 1 ('b')
+unset($arr[1]);
+
+// Optional Step 3: Reindex the array
+$arr = array_values($arr);
+
+print_r($arr);
+?>
+
+Output:
+Array
+(
+    [0] => a
+    [1] => c
+    [2] => d
+)
 
 62)
 <?php
