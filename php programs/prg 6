@@ -1,0 +1,10 @@
+6)
+<form method="get" action="nextpage.php">
+  Name: <input type="text" name="username">
+  <input type="submit">
+</form>
+OUTPUT:
+<form method="get" action="nextpage.php">
+  Name: <input type="text" name="username">
+  <input type="submit">
+</form>
