@@ -1,0 +1,27 @@
+92)
+Steps to get a cookie value using server-side scripting (PHP):
+
+1)Set the cookie in the client’s browser using setcookie() (done earlier).
+
+2)Access the cookie value in PHP using the $_COOKIE superglobal array.
+
+3)Check if the cookie exists using isset($_COOKIE['cookie_name']).
+
+4)Retrieve and use the cookie value with $_COOKIE['cookie_name'].
+
+Example:
+
+<?php
+// Set a cookie named "User" with value "John"
+setcookie("User", "John");
+
+// Display the cookie value if it is set
+if (isset($_COOKIE["User"])) {
+    echo "Cookie value: " . $_COOKIE["User"];
+} else {
+    echo "Cookie not set. Please refresh the page.";
+}
+?>
+
+OUTPUT:
+Cookie value: John
