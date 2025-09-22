@@ -1,0 +1,16 @@
+96)
+Step-by-Step:
+
+Start the session using session_start().
+
+Assign value to a session variable using $_SESSION['key'] = value;.
+
+EXAMPLE:
+<?php
+session_start();
+$_SESSION['user'] = "John";
+echo $_SESSION['user'];
+?>
+OUTPUT:
+ John
+
